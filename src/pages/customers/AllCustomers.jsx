@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PageHeader, StatCard, Badge } from "@/components/PageChrome";
 import api from "@/lib/api";
@@ -14,11 +14,11 @@ export default function AllCustomers() {
   const [plan, setPlan] = useState("");
   const nav = useNavigate();
 
-  const load = async () => {
+  const load = useCallback(async () => {
     const { data } = await api.get("/customers", { params: { q, status, plan } });
     setRows(data.customers || []);
-  };
-  useEffect(() => { load(); }, [q, status, plan]);
+  }, [q, status, plan]);
+  useEffect(() => { load(); }, [load]);
 
   const stats = {
     total: rows.length || 2843,
