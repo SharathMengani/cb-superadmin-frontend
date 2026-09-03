@@ -1,0 +1,5 @@
+/* Root reset */
+.App {
+    min-height: 100vh;
+    background: hsl(240 15% 4%);
+}

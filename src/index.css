@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@layer base {
+    :root {
+        /* Deep midnight / obsidian palette with violet accents */
+        --background: 240 15% 4%;
+        --foreground: 240 10% 96%;
+
+        --card: 240 14% 7%;
+        --card-foreground: 240 10% 96%;
+
+        --popover: 240 14% 8%;
+        --popover-foreground: 240 10% 96%;
+
+        --primary: 262 83% 62%;
+        --primary-foreground: 0 0% 100%;
+
+        --secondary: 240 10% 12%;
+        --secondary-foreground: 240 10% 96%;
+
+        --muted: 240 10% 12%;
+        --muted-foreground: 240 5% 60%;
+
+        --accent: 262 60% 20%;
+        --accent-foreground: 262 80% 90%;
+
+        --destructive: 0 72% 51%;
+        --destructive-foreground: 0 0% 100%;
+
+        --success: 152 68% 45%;
+        --warning: 38 92% 50%;
+
+        --border: 240 12% 14%;
+        --input: 240 12% 14%;
+        --ring: 262 83% 62%;
+
+        --chart-1: 262 83% 62%;
+        --chart-2: 190 90% 55%;
+        --chart-3: 152 68% 45%;
+        --chart-4: 38 92% 50%;
+        --chart-5: 340 82% 60%;
+
+        --radius: 0.75rem;
+
+        --sidebar-bg: 240 16% 5%;
+    }
+}
+
+@layer base {
+    * { @apply border-border; }
+    html, body, #root { height: 100%; }
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+        -webkit-font-smoothing: antialiased;
+    }
+    code, .mono {
+        font-family: 'JetBrains Mono', monospace;
+    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: hsl(240 12% 18%); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: hsl(262 40% 40%); }
+}
+
+/* Utility classes for the admin aesthetic */
+@layer components {
+    .glass-card {
+        background: linear-gradient(180deg, hsl(240 14% 8% / 0.85), hsl(240 14% 6% / 0.85));
+        backdrop-filter: blur(16px);
+        border: 1px solid hsl(240 12% 14%);
+    }
+    .grid-bg {
+        background-image:
+            linear-gradient(hsl(240 12% 10%) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(240 12% 10%) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+    .glow-primary {
+        box-shadow: 0 0 40px -8px hsl(262 83% 62% / 0.4);
+    }
+    .stat-card {
+        @apply glass-card rounded-2xl p-5 transition-all duration-300;
+    }
+    .stat-card:hover {
+        border-color: hsl(262 60% 40%);
+        transform: translateY(-2px);
+    }
+    .sidebar-item {
+        @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-muted-foreground transition-all;
+    }
+    .sidebar-item:hover {
+        @apply bg-secondary text-foreground;
+    }
+    .sidebar-item.active {
+        background: linear-gradient(90deg, hsl(262 83% 62% / 0.15), transparent);
+        color: hsl(262 83% 75%);
+        border-left: 2px solid hsl(262 83% 62%);
+        padding-left: calc(0.75rem - 2px);
+    }
+    .badge-success {
+        @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium;
+        background: hsl(152 68% 45% / 0.12);
+        color: hsl(152 68% 65%);
+        border: 1px solid hsl(152 68% 45% / 0.3);
+    }
+    .badge-warning {
+        @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium;
+        background: hsl(38 92% 50% / 0.12);
+        color: hsl(38 92% 65%);
+        border: 1px solid hsl(38 92% 50% / 0.3);
+    }
+    .badge-danger {
+        @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium;
+        background: hsl(0 72% 51% / 0.12);
+        color: hsl(0 72% 70%);
+        border: 1px solid hsl(0 72% 51% / 0.3);
+    }
+    .badge-info {
+        @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium;
+        background: hsl(262 83% 62% / 0.12);
+        color: hsl(262 83% 78%);
+        border: 1px solid hsl(262 83% 62% / 0.3);
+    }
+    .badge-neutral {
+        @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium;
+        background: hsl(240 10% 20%);
+        color: hsl(240 10% 80%);
+        border: 1px solid hsl(240 10% 25%);
+    }
+    .dot {
+        @apply w-1.5 h-1.5 rounded-full;
+    }
+    .btn-gradient {
+        background: linear-gradient(135deg, hsl(262 83% 62%), hsl(280 75% 55%));
+        color: white;
+        transition: all 0.2s ease;
+    }
+    .btn-gradient:hover {
+        box-shadow: 0 0 30px -5px hsl(262 83% 62% / 0.6);
+        transform: translateY(-1px);
+    }
+    .table-row-hover:hover {
+        background: hsl(240 12% 9%);
+    }
+    .page-header {
+        @apply flex items-center justify-between mb-8;
+    }
+    .breadcrumb {
+        @apply flex items-center gap-2 text-xs text-muted-foreground mb-1;
+    }
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+.pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
